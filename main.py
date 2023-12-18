@@ -17,12 +17,12 @@ medium_graph = load_graph('medium.in')
 large_graph = load_graph('large.in')
 
 # Question 3.1
-print(f"3.1 Number of directed links (medium): {medium_graph.number_of_edges()}")
-print(f"3.1 Number of directed links (large): {large_graph.number_of_edges()}")
+print(f"Number of directed links (medium): {medium_graph.number_of_edges()}")
+print(f"Number of directed links (large): {large_graph.number_of_edges()}")
 
 # Question 3.2
-print(f"3.2 Number of users (medium): {medium_graph.number_of_nodes()}")
-print(f"3.2 Number of users (large): {large_graph.number_of_nodes()}")
+print(f"Number of users (medium): {medium_graph.number_of_nodes()}")
+print(f"Number of users (large): {large_graph.number_of_nodes()}")
 
 # Question 3.3
 indegree_dist_medium = [in_degree for _, in_degree in medium_graph.in_degree]
