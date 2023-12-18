@@ -7,7 +7,7 @@ def load_graph(file_path):
     G = nx.DiGraph()
     with open(file_path, 'r') as file:
         for line in file:
-            userA, userB = map(int, line.strip().split('\t'))
+            userA, userB = map(int, line.strip().split())
             G.add_edge(userA, userB)
     return G
 
