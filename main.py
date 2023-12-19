@@ -96,26 +96,26 @@ print(f"Number of nodes in the largest strongly connected component: {num_nodes_
 print(f"Number of links in the largest strongly connected component: {num_links_largest_scc}")
 
 print("Large Network")
-weakly_connected_components = nx.number_weakly_connected_components(medium_graph)
+weakly_connected_components = nx.number_weakly_connected_components(large_graph)
 print(f"Number of weakly connected components: {weakly_connected_components}")
 
 # Number of strongly connected components
-strongly_connected_components = nx.number_strongly_connected_components(medium_graph)
+strongly_connected_components = nx.number_strongly_connected_components(large_graph)
 print(f"Number of strongly connected components: {strongly_connected_components}")
 
 # Find the sizes of strongly connected components
-strongly_connected_components_sizes = [len(component) for component in nx.strongly_connected_components(medium_graph)]
+strongly_connected_components_sizes = [len(component) for component in nx.strongly_connected_components(large_graph)]
 
 # Find the largest strongly connected component
 largest_strongly_connected_component_size = max(strongly_connected_components_sizes)
 print(f"Size of the largest strongly connected component: {largest_strongly_connected_component_size}")
 
 # Alternatively, you can find the largest strongly connected component directly
-largest_strongly_connected_component = max(nx.strongly_connected_components(medium_graph), key=len)
+largest_strongly_connected_component = max(nx.strongly_connected_components(large_graph), key=len)
 print(f"Nodes in the largest strongly connected component: {len(largest_strongly_connected_component)}")
 
 # Number of nodes and links in the largest strongly connected component
 num_nodes_largest_scc = len(largest_strongly_connected_component)
-num_links_largest_scc = medium_graph.subgraph(largest_strongly_connected_component).number_of_edges()
+num_links_largest_scc = large_graph.subgraph(largest_strongly_connected_component).number_of_edges()
 print(f"Number of nodes in the largest strongly connected component: {num_nodes_largest_scc}")
 print(f"Number of links in the largest strongly connected component: {num_links_largest_scc}")
