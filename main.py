@@ -36,21 +36,54 @@ outdegrees = list(dict(medium_graph.out_degree()).values())
 indegrees = [degree for degree in indegrees if degree > 0]
 outdegrees = [degree for degree in outdegrees if degree > 0]
 
-# Plot in-degrees
-plt.hist(indegrees, bins=range(min(indegrees), max(indegrees) + 2), alpha=0.5, label='Indegree')
-plt.xlabel('Indegree')
-plt.ylabel('Frequency')
-plt.title('Indegree Distribution (medium)')
-plt.legend()
-plt.show()
 
-# Plot out-degrees
-plt.hist(outdegrees, bins=range(min(outdegrees), max(outdegrees) + 2), alpha=0.5, label='Outdegree')
-plt.xlabel('Outdegree')
+def degree_histogram_directed(G, in_degree=False, out_degree=False):
+    """Return a list of the frequency of each degree value.
+
+    Parameters
+    ----------
+    G : Networkx graph
+       A graph
+    in_degree : bool
+    out_degree : bool
+
+    Returns
+    -------
+    hist : list
+       A list of frequencies of degrees.
+       The degree values are the index in the list.
+
+    Notes
+    -----
+    Note: the bins are width one, hence len(list) can be large
+    (Order(number_of_edges))
+    """
+    nodes = G.nodes()
+    if in_degree:
+        in_degree = dict(G.in_degree())
+        degseq = [in_degree.get(k, 0) for k in nodes]
+    elif out_degree:
+        out_degree = dict(G.out_degree())
+        degseq = [out_degree.get(k, 0) for k in nodes]
+    else:
+        degseq = [v for k, v in G.degree()]
+    dmax = max(degseq) + 1
+    freq = [0 for d in range(dmax)]
+    for d in degseq:
+        freq[d] += 1
+    return freq
+
+
+G = nx.scale_free_graph(5000)
+
+in_degree_freq = degree_histogram_directed(G, in_degree=True)
+out_degree_freq = degree_histogram_directed(G, out_degree=True)
+degrees = range(len(in_degree_freq))
+plt.figure(figsize=(12, 8))
+plt.loglog(range(len(in_degree_freq)), in_degree_freq, 'go-', label='in-degree')
+plt.loglog(range(len(out_degree_freq)), out_degree_freq, 'bo-', label='out-degree')
+plt.xlabel('Degree')
 plt.ylabel('Frequency')
-plt.title('Outdegree Distribution (medium)')
-plt.legend()
-plt.show()
 # Repeat similar steps for large graph
 
 # Continue with similar approaches for other questions.
