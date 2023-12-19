@@ -28,6 +28,7 @@ def degree_histogram_directed(G, in_degree=False, out_degree=False):
     return freq
 
 
+
 # Load the graphs
 medium_graph = load_graph('medium.in')
 large_graph = load_graph('large.in')
