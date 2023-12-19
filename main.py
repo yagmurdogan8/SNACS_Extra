@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
+
 # Load the graph from a file
 def load_graph(file_path):
     G = nx.DiGraph()
@@ -9,6 +10,7 @@ def load_graph(file_path):
             userA, userB = map(int, line.strip().split())
             G.add_edge(userA, userB)
     return G
+
 
 # Define a function to compute degree histograms for directed graphs
 def degree_histogram_directed(G, in_degree=False, out_degree=False):
@@ -24,6 +26,7 @@ def degree_histogram_directed(G, in_degree=False, out_degree=False):
     for d in degseq:
         freq[d] += 1
     return freq
+
 
 # Load the graphs
 medium_graph = load_graph('medium.in')
