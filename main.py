@@ -140,7 +140,7 @@ for node in medium_largest_weakly_connected_subgraph.nodes():
     all_distances.extend(shortest_paths)
 
 # Plot the histogram of distances
-plt.hist(all_distances, bins=range(max(all_distances) + 2), align='left', density=True)
+plt.hist(all_distances, bins=range(max(all_distances)), align='left', density=True)
 plt.xlabel('Distance')
 plt.ylabel('Frequency')
 plt.title('Distance Distribution of the Largest Weakly Connected Component for Medium Network')
@@ -155,7 +155,7 @@ for node in large_largest_weakly_connected_subgraph.nodes():
     all_distances.extend(shortest_paths)
 
 # Plot the histogram of distances
-plt.hist(all_distances, bins=range(max(all_distances) + 2), align='left', density=True)
+plt.hist(all_distances, bins=range(max(all_distances)), align='left', density=True)
 plt.xlabel('Distance')
 plt.ylabel('Frequency')
 plt.title('Distance Distribution of the Largest Weakly Connected Component for Large Network')
