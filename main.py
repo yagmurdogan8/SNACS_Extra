@@ -160,3 +160,20 @@ plt.xlabel('Distance')
 plt.ylabel('Frequency')
 plt.title('Distance Distribution of the Largest Weakly Connected Component for Large Network')
 plt.show()
+
+# Question 3.7
+
+# Calculate centrality measures
+betweenness_centrality = nx.betweenness_centrality(medium_graph)
+closeness_centrality = nx.closeness_centrality(medium_graph)
+degree_centrality = nx.degree_centrality(medium_graph)
+
+# Get the top 20 nodes for each centrality measure
+top_betweenness_nodes = sorted(betweenness_centrality, key=betweenness_centrality.get, reverse=True)[:20]
+top_closeness_nodes = sorted(closeness_centrality, key=closeness_centrality.get, reverse=True)[:20]
+top_degree_nodes = sorted(degree_centrality, key=degree_centrality.get, reverse=True)[:20]
+
+# Display the top nodes for each centrality measure
+print("Top 20 Nodes by Betweenness Centrality:", top_betweenness_nodes)
+print("Top 20 Nodes by Closeness Centrality:", top_closeness_nodes)
+print("Top 20 Nodes by Degree Centrality:", top_degree_nodes)
