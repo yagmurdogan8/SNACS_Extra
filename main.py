@@ -26,8 +26,8 @@ def degree_histogram_directed(G, in_degree=False, out_degree=False):
     return freq
 
 # Load the graphs
-medium_graph = load_graph('path/to/medium.in')
-large_graph = load_graph('path/to/large.in')
+medium_graph = load_graph('medium.in')
+large_graph = load_graph('large.in')
 
 # Question 3.1
 print(f"Number of directed links (medium): {medium_graph.number_of_edges()}")
