@@ -70,7 +70,7 @@ plt.show()
 
 # Question 3.4
 
-print("Medium Network")
+print("Medium Network:")
 weakly_connected_components = nx.number_weakly_connected_components(medium_graph)
 print(f"Number of weakly connected components: {weakly_connected_components}")
 
@@ -95,7 +95,7 @@ num_links_largest_scc = medium_graph.subgraph(largest_strongly_connected_compone
 print(f"Number of nodes in the largest strongly connected component: {num_nodes_largest_scc}")
 print(f"Number of links in the largest strongly connected component: {num_links_largest_scc}")
 
-print("Large Network")
+print("Large Network:")
 weakly_connected_components = nx.number_weakly_connected_components(large_graph)
 print(f"Number of weakly connected components: {weakly_connected_components}")
 
@@ -119,3 +119,11 @@ num_nodes_largest_scc = len(largest_strongly_connected_component)
 num_links_largest_scc = large_graph.subgraph(largest_strongly_connected_component).number_of_edges()
 print(f"Number of nodes in the largest strongly connected component: {num_nodes_largest_scc}")
 print(f"Number of links in the largest strongly connected component: {num_links_largest_scc}")
+
+# Question 3.5
+
+medium_average_clustering_coefficient = nx.average_clustering(medium_graph)
+large_average_clustering_coefficient = nx.average_clustering(large_graph)
+
+print(f"Average Clustering Coefficient for the mdeium network: {medium_average_clustering_coefficient}")
+print(f"Average Clustering Coefficient for the large network: {large_average_clustering_coefficient}")
