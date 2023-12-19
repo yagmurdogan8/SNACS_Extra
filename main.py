@@ -127,3 +127,19 @@ large_average_clustering_coefficient = nx.average_clustering(large_graph)
 
 print(f"Average Clustering Coefficient for the mdeium network: {medium_average_clustering_coefficient}")
 print(f"Average Clustering Coefficient for the large network: {large_average_clustering_coefficient}")
+
+# Question 3.6
+medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
+medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_weakly_connected_component)
+
+all_distances = []
+for node in medium_largest_weakly_connected_subgraph.nodes():
+    shortest_paths = nx.single_target_shortest_path_length(medium_largest_weakly_connected_subgraph.reverse(), node)
+    all_distances.extend(shortest_paths.values())
+
+# Plot the histogram of distances
+plt.hist(all_distances, bins=range(max(all_distances) + 2), align='left', density=True)
+plt.xlabel('Distance')
+plt.ylabel('Frequency')
+plt.title('Distance Distribution of the Largest Weakly Connected Component for Medium Network')
+plt.show()
