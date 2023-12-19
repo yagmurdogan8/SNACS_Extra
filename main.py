@@ -137,7 +137,7 @@ medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_
 all_distances = []
 for node in medium_largest_weakly_connected_subgraph.nodes():
     shortest_paths = nx.single_target_shortest_path_length(medium_largest_weakly_connected_subgraph.reverse(), node)
-    all_distances.extend(list(shortest_paths.values()))
+    all_distances.extend(shortest_paths)
 
 # Plot the histogram of distances
 plt.hist(all_distances, bins=range(max(all_distances) + 2), align='left', density=True)
@@ -152,7 +152,7 @@ large_largest_weakly_connected_subgraph = large_graph.subgraph(large_largest_wea
 all_distances = []
 for node in large_largest_weakly_connected_subgraph.nodes():
     shortest_paths = nx.single_target_shortest_path_length(large_largest_weakly_connected_subgraph.reverse(), node)
-    all_distances.extend(list(shortest_paths.values()))
+    all_distances.extend(shortest_paths)
 
 # Plot the histogram of distances
 plt.hist(all_distances, bins=range(max(all_distances) + 2), align='left', density=True)
