@@ -25,11 +25,15 @@ print(f"Number of users (medium): {medium_graph.number_of_nodes()}")
 print(f"Number of users (large): {large_graph.number_of_nodes()}")
 
 # Question 3.3
-indegree_dict = dict(medium_graph.in_degree())
-outdegree_dict = dict(medium_graph.out_degree())
+indegree_values = list(dict(medium_graph.in_degree()).values())
+outdegree_values = list(dict(medium_graph.out_degree()).values())
+
+# Exclude nodes with zero degrees
+indegree_values = [degree for degree in indegree_values if degree > 0]
+outdegree_values = [degree for degree in outdegree_values if degree > 0]
 
 # Plot in-degrees
-plt.hist(list(indegree_dict.values()), bins=range(max(indegree_dict.values()) + 2), alpha=0.5, label='Indegree')
+plt.hist(indegree_values, bins=range(max(indegree_values) + 2), alpha=0.5, label='Indegree')
 plt.xlabel('Indegree')
 plt.ylabel('Frequency')
 plt.title('Indegree Distribution (medium)')
@@ -37,7 +41,7 @@ plt.legend()
 plt.show()
 
 # Plot out-degrees
-plt.hist(list(outdegree_dict.values()), bins=range(max(outdegree_dict.values()) + 2), alpha=0.5, label='Outdegree')
+plt.hist(outdegree_values, bins=range(max(outdegree_values) + 2), alpha=0.5, label='Outdegree')
 plt.xlabel('Outdegree')
 plt.ylabel('Frequency')
 plt.title('Outdegree Distribution (medium)')
