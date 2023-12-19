@@ -133,10 +133,11 @@ print(f"Average Clustering Coefficient for the large network: {large_average_clu
 medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
 medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_weakly_connected_component)
 
+# Compute the distance distribution
 all_distances = []
 for node in medium_largest_weakly_connected_subgraph.nodes():
-    shortest_paths = nx.single_target_shortest_path_length(medium_largest_weakly_connected_subgraph.reverse(), node)
-    all_distances.extend(shortest_paths.values())
+    shortest_paths = list(nx.single_target_shortest_path_length(medium_largest_weakly_connected_subgraph.reverse(), node).values())
+    all_distances.extend(shortest_paths)
 
 # Plot the histogram of distances
 plt.hist(all_distances, bins=range(max(all_distances) + 2), align='left', density=True)
@@ -150,8 +151,8 @@ large_largest_weakly_connected_subgraph = large_graph.subgraph(large_largest_wea
 
 all_distances = []
 for node in large_largest_weakly_connected_subgraph.nodes():
-    shortest_paths = nx.single_target_shortest_path_length(large_largest_weakly_connected_subgraph.reverse(), node)
-    all_distances.extend(shortest_paths.values())
+    shortest_paths = list(nx.single_target_shortest_path_length(large_largest_weakly_connected_subgraph.reverse(), node).values())
+    all_distances.extend(shortest_paths)
 
 # Plot the histogram of distances
 plt.hist(all_distances, bins=range(max(all_distances) + 2), align='left', density=True)
