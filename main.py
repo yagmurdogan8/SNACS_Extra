@@ -132,11 +132,16 @@ print(f"Average Clustering Coefficient for the large network: {large_average_clu
 medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
 medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_weakly_connected_component)
 
-# Compute the distance distribution
+# Compute the shortest path lengths within the largest weakly connected component
 all_distances = []
-for node in medium_largest_weakly_connected_subgraph.nodes():
-    shortest_paths = list(nx.single_target_shortest_path_length(medium_largest_weakly_connected_subgraph.reverse(), node).values())
-    all_distances.extend(shortest_paths)
+for source in medium_largest_weakly_connected_subgraph.nodes():
+    shortest_paths = nx.single_target_shortest_path_length(
+        medium_largest_weakly_connected_subgraph.reverse(), source
+    )
+    all_distances.extend(shortest_paths.values())
+
+# Filter out the None values
+all_distances = [dist for dist in all_distances if dist is not None]
 
 # Plot the histogram of distances
 plt.hist(all_distances, bins=range(int(max(all_distances, default=0)) + 1), align='left', density=True)
@@ -148,10 +153,10 @@ plt.show()
 large_largest_weakly_connected_component = max(nx.weakly_connected_components(large_graph), key=len)
 large_largest_weakly_connected_subgraph = large_graph.subgraph(large_largest_weakly_connected_component)
 
-all_distances = []
+all_distances = [dist for dist in all_distances if dist is not None]
 for node in large_largest_weakly_connected_subgraph.nodes():
-    shortest_paths = list(nx.single_target_shortest_path_length(large_largest_weakly_connected_subgraph.reverse(), node).values())
-    all_distances.extend(shortest_paths)
+    shortest_paths = nx.single_target_shortest_path_length(large_largest_weakly_connected_subgraph.reverse(), node)
+    all_distances.extend(list(shortest_paths.values()))
 
 # Plot the histogram of distances
 plt.hist(all_distances, bins=range(int(max(all_distances, default=0)) + 1), align='left', density=True)
