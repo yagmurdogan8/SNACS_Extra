@@ -171,6 +171,7 @@ plt.ylabel('Frequency')
 plt.title('Distance Distribution of the Largest Weakly Connected Component for Large Network')
 plt.show()
 
+
 # Question 3.7
 
 # Calculate centrality measures
