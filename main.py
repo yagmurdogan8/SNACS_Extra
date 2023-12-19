@@ -28,7 +28,6 @@ def degree_histogram_directed(G, in_degree=False, out_degree=False):
     return freq
 
 
-
 # Load the graphs
 medium_graph = load_graph('medium.in')
 large_graph = load_graph('large.in')
@@ -43,6 +42,7 @@ print(f"Number of users (large): {large_graph.number_of_nodes()}")
 
 # Question 3.3
 in_degree_freq_medium = degree_histogram_directed(medium_graph, in_degree=True)
+in_degree_freq_medium = [freq for freq in in_degree_freq_medium if freq > 0]
 out_degree_freq_medium = degree_histogram_directed(medium_graph, out_degree=True)
 
 in_degree_freq_large = degree_histogram_directed(large_graph, in_degree=True)
