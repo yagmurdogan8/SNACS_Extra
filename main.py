@@ -1,7 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-
 # Load the graph from a file
 def load_graph(file_path):
     G = nx.DiGraph()
@@ -11,10 +10,24 @@ def load_graph(file_path):
             G.add_edge(userA, userB)
     return G
 
+# Define a function to compute degree histograms for directed graphs
+def degree_histogram_directed(G, in_degree=False, out_degree=False):
+    nodes = G.nodes()
+    if in_degree:
+        degseq = [d for n, d in G.in_degree()]
+    elif out_degree:
+        degseq = [d for n, d in G.out_degree()]
+    else:
+        degseq = [d for n, d in G.degree()]
+    dmax = max(degseq) + 1
+    freq = [0 for _ in range(dmax)]
+    for d in degseq:
+        freq[d] += 1
+    return freq
 
 # Load the graphs
-medium_graph = load_graph('medium.in')
-large_graph = load_graph('large.in')
+medium_graph = load_graph('path/to/medium.in')
+large_graph = load_graph('path/to/large.in')
 
 # Question 3.1
 print(f"Number of directed links (medium): {medium_graph.number_of_edges()}")
@@ -25,65 +38,28 @@ print(f"Number of users (medium): {medium_graph.number_of_nodes()}")
 print(f"Number of users (large): {large_graph.number_of_nodes()}")
 
 # Question 3.3
-indegree_values = list(dict(medium_graph.in_degree()).values())
-outdegree_values = list(dict(medium_graph.out_degree()).values())
+in_degree_freq_medium = degree_histogram_directed(medium_graph, in_degree=True)
+out_degree_freq_medium = degree_histogram_directed(medium_graph, out_degree=True)
 
-# Exclude nodes with zero degrees
-indegrees = list(dict(medium_graph.in_degree()).values())
-outdegrees = list(dict(medium_graph.out_degree()).values())
+in_degree_freq_large = degree_histogram_directed(large_graph, in_degree=True)
+out_degree_freq_large = degree_histogram_directed(large_graph, out_degree=True)
 
-# Exclude nodes with zero degrees
-indegrees = [degree for degree in indegrees if degree > 0]
-outdegrees = [degree for degree in outdegrees if degree > 0]
-
-
-def degree_histogram_directed(G, in_degree=False, out_degree=False):
-    """Return a list of the frequency of each degree value.
-
-    Parameters
-    ----------
-    G : Networkx graph
-       A graph
-    in_degree : bool
-    out_degree : bool
-
-    Returns
-    -------
-    hist : list
-       A list of frequencies of degrees.
-       The degree values are the index in the list.
-
-    Notes
-    -----
-    Note: the bins are width one, hence len(list) can be large
-    (Order(number_of_edges))
-    """
-    nodes = G.nodes()
-    if in_degree:
-        in_degree = dict(G.in_degree())
-        degseq = [in_degree.get(k, 0) for k in nodes]
-    elif out_degree:
-        out_degree = dict(G.out_degree())
-        degseq = [out_degree.get(k, 0) for k in nodes]
-    else:
-        degseq = [v for k, v in G.degree()]
-    dmax = max(degseq) + 1
-    freq = [0 for d in range(dmax)]
-    for d in degseq:
-        freq[d] += 1
-    return freq
-
-
-G = nx.scale_free_graph(5000)
-
-in_degree_freq = degree_histogram_directed(G, in_degree=True)
-out_degree_freq = degree_histogram_directed(G, out_degree=True)
-degrees = range(len(in_degree_freq))
+# Plot degree distributions for medium graph
 plt.figure(figsize=(12, 8))
-plt.loglog(range(len(in_degree_freq)), in_degree_freq, 'go-', label='in-degree')
-plt.loglog(range(len(out_degree_freq)), out_degree_freq, 'bo-', label='out-degree')
+plt.loglog(range(len(in_degree_freq_medium)), in_degree_freq_medium, 'go-', label='Medium In-degree')
+plt.loglog(range(len(out_degree_freq_medium)), out_degree_freq_medium, 'bo-', label='Medium Out-degree')
 plt.xlabel('Degree')
 plt.ylabel('Frequency')
-# Repeat similar steps for large graph
+plt.legend()
+plt.title('Degree Distribution (Medium Graph)')
+plt.show()
 
-# Continue with similar approaches for other questions.
+# Plot degree distributions for large graph
+plt.figure(figsize=(12, 8))
+plt.loglog(range(len(in_degree_freq_large)), in_degree_freq_large, 'go-', label='Large In-degree')
+plt.loglog(range(len(out_degree_freq_large)), out_degree_freq_large, 'bo-', label='Large Out-degree')
+plt.xlabel('Degree')
+plt.ylabel('Frequency')
+plt.legend()
+plt.title('Degree Distribution (Large Graph)')
+plt.show()
