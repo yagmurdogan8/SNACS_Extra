@@ -29,11 +29,15 @@ indegree_values = list(dict(medium_graph.in_degree()).values())
 outdegree_values = list(dict(medium_graph.out_degree()).values())
 
 # Exclude nodes with zero degrees
-indegree_values = [degree for degree in indegree_values if degree > 0]
-outdegree_values = [degree for degree in outdegree_values if degree > 0]
+indegrees = list(dict(medium_graph.in_degree()).values())
+outdegrees = list(dict(medium_graph.out_degree()).values())
+
+# Exclude nodes with zero degrees
+indegrees = [degree for degree in indegrees if degree > 0]
+outdegrees = [degree for degree in outdegrees if degree > 0]
 
 # Plot in-degrees
-plt.hist(indegree_values, bins=range(max(indegree_values) + 2), alpha=0.5, label='Indegree')
+plt.hist(indegrees, bins=range(min(indegrees), max(indegrees) + 2), alpha=0.5, label='Indegree')
 plt.xlabel('Indegree')
 plt.ylabel('Frequency')
 plt.title('Indegree Distribution (medium)')
@@ -41,7 +45,7 @@ plt.legend()
 plt.show()
 
 # Plot out-degrees
-plt.hist(outdegree_values, bins=range(max(outdegree_values) + 2), alpha=0.5, label='Outdegree')
+plt.hist(outdegrees, bins=range(min(outdegrees), max(outdegrees) + 2), alpha=0.5, label='Outdegree')
 plt.xlabel('Outdegree')
 plt.ylabel('Frequency')
 plt.title('Outdegree Distribution (medium)')
