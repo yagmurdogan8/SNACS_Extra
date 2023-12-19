@@ -129,7 +129,6 @@ print(f"Average Clustering Coefficient for the mdeium network: {medium_average_c
 print(f"Average Clustering Coefficient for the large network: {large_average_clustering_coefficient}")
 
 # Question 3.6
-
 medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
 medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_weakly_connected_component)
 
@@ -137,10 +136,10 @@ medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_
 all_distances = []
 for node in medium_largest_weakly_connected_subgraph.nodes():
     shortest_paths = nx.single_target_shortest_path_length(medium_largest_weakly_connected_subgraph.reverse(), node)
-    all_distances.extend(shortest_paths)
+    all_distances.extend(shortest_paths.values())
 
 # Plot the histogram of distances
-plt.hist(all_distances, bins=range(int(max(all_distances))), align='left', density=True)
+plt.hist(all_distances, bins=range(int(max(all_distances, default=0)) + 1), align='left', density=True)
 plt.xlabel('Distance')
 plt.ylabel('Frequency')
 plt.title('Distance Distribution of the Largest Weakly Connected Component for Medium Network')
@@ -149,13 +148,13 @@ plt.show()
 large_largest_weakly_connected_component = max(nx.weakly_connected_components(large_graph), key=len)
 large_largest_weakly_connected_subgraph = large_graph.subgraph(large_largest_weakly_connected_component)
 
-all_distances = []
+all_distances = [dist for distances in all_distances for dist in distances]
 for node in large_largest_weakly_connected_subgraph.nodes():
     shortest_paths = nx.single_target_shortest_path_length(large_largest_weakly_connected_subgraph.reverse(), node)
     all_distances.extend(shortest_paths)
 
 # Plot the histogram of distances
-plt.hist(all_distances, bins=range(int(max(all_distances))), align='left', density=True)
+plt.hist(all_distances, bins=range(int(max(all_distances, default=0)) + 1), align='left', density=True)
 plt.xlabel('Distance')
 plt.ylabel('Frequency')
 plt.title('Distance Distribution of the Largest Weakly Connected Component for Large Network')
