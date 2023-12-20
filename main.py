@@ -182,15 +182,17 @@ print("Top 20 Nodes by Degree Centrality:", top_degree_nodes)
 giant_component = max(nx.weakly_connected_components(medium_graph), key=len)
 giant_component_subgraph = medium_graph.subgraph(giant_component)
 
+# Convert the directed graph to an undirected one
+giant_component_undirected = giant_component_subgraph.to_undirected()
+
 # Apply Louvain method for community detection
-partition = community.best_partition(giant_component_subgraph)
+partition = community.best_partition(giant_component_undirected)
 
 # Draw the graph with community colors
-pos = nx.spring_layout(giant_component_subgraph)
-colors = [partition[node] for node in giant_component_subgraph.nodes()]
+pos = nx.spring_layout(giant_component_undirected)
+colors = [partition[node] for node in giant_component_undirected.nodes()]
 
 plt.figure(figsize=(10, 8))
-nx.draw(giant_component_subgraph, pos, node_color=colors, cmap=plt.cm.get_cmap("viridis"), with_labels=False,
-        node_size=300)
+nx.draw(giant_component_undirected, pos, node_color=colors, cmap=plt.cm.get_cmap("viridis"), with_labels=False, node_size=300)
 plt.title('Community Detection using Louvain Method')
 plt.show()
