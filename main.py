@@ -193,6 +193,7 @@ pos = nx.spring_layout(giant_component_undirected)
 colors = [partition[node] for node in giant_component_undirected.nodes()]
 
 plt.figure(figsize=(10, 8))
-nx.draw(giant_component_undirected, pos, node_color=colors, cmap=plt.cm.get_cmap("viridis"), with_labels=False, node_size=300)
+nx.draw(giant_component_undirected, pos, node_color=colors, cmap=plt.colormaps.get_cmap("viridis"),
+        with_labels=False, node_size=300)
 plt.title('Community Detection using Louvain Method')
 plt.show()
