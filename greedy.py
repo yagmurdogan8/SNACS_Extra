@@ -18,7 +18,7 @@ plt.show()
 
 
 def greedy_densest_subgraph(graph):
-    densest_subgraphs = [graph.copy()]  # List to store graphs at each iteration
+    densest_subgraphs = [graph.copy()]  # store graphs after each iteration
     current_density = nx.density(graph)
 
     while True:
