@@ -18,26 +18,33 @@ plt.show()
 
 
 def greedy_densest_subgraph(graph):
-    densest_subgraph = graph.copy()
-    current_density = nx.density(densest_subgraph)
+    densest_subgraphs = [graph.copy()]  # List to store graphs at each iteration
+    current_density = nx.density(graph)
 
     while True:
-        min_degree_node = min(densest_subgraph, key=densest_subgraph.degree)
-        densest_subgraph.remove_node(min_degree_node)
-        new_density = nx.density(densest_subgraph)
+        min_degree_node = min(graph, key=graph.degree)
+        graph.remove_node(min_degree_node)
+        new_density = nx.density(graph)
 
         if new_density > current_density:
             current_density = new_density
+            densest_subgraphs.append(graph.copy())
+            print(f"Iteration: Density = {current_density:.4f}, Nodes: {graph.nodes()}, Edges: {graph.edges()}")
         else:
             break
 
-    return densest_subgraph
+    return densest_subgraphs
 
 
-densest_subgraph = greedy_densest_subgraph(undirected_graph)
+densest_subgraphs = greedy_densest_subgraph(undirected_graph)
 
-# Print the nodes of the densest subgraph
-print("Nodes in the Densest Subgraph:", densest_subgraph.nodes())
+# iterations graphs (for all iteration the new graph)
+for i, graph in enumerate(densest_subgraphs):
+    plt.figure(figsize=(8, 6))
+    nx.draw(graph, pos=node_positions, with_labels=True, node_size=500, font_size=10, font_color='black', font_weight='bold')
+    plt.title(f'Iteration {i + 1}')
+    plt.show()
 
-# Print the edges of the densest subgraph
-print("Edges in the Densest Subgraph:", densest_subgraph.edges())
+# Print the nodes and edges of the densest subgraph
+print("Nodes in the Densest Subgraph:", densest_subgraphs[-1].nodes())
+print("Edges in the Densest Subgraph:", densest_subgraphs[-1].edges())
