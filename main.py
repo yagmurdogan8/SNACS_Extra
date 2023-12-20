@@ -137,11 +137,12 @@ largest_weakly_connected_subgraph = medium_graph.subgraph(largest_weakly_connect
 # Calculate the distance distribution
 distances = nx.shortest_path_length(largest_weakly_connected_subgraph)
 # Plot the distribution
+pos = nx.spring_layout(largest_weakly_connected_subgraph)
 
-plt.hist(distances, bins=range(int(max(distances, default=0)) + 1), align='left', density=True)
-plt.xlabel('Distance')
-plt.ylabel('Frequency')
-plt.title('Distance Distribution of the Largest Weakly Connected Component for Medium Network')
+# Draw the nodes and edges
+nx.draw(largest_weakly_connected_subgraph, pos, with_labels=True, node_color='lightblue', node_size=300, edge_color='grey')
+
+# Show the plot
 plt.show()
 
 # medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
