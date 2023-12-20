@@ -86,7 +86,7 @@ strongly_connected_components_sizes = [len(component) for component in nx.strong
 largest_strongly_connected_component_size = max(strongly_connected_components_sizes)
 print(f"Size of the largest strongly connected component: {largest_strongly_connected_component_size}")
 
-# Alternatively, you can find the largest strongly connected component directly
+# Alternative for lscc
 largest_strongly_connected_component = max(nx.strongly_connected_components(medium_graph), key=len)
 print(f"Nodes in the largest strongly connected component: {len(largest_strongly_connected_component)}")
 
@@ -104,10 +104,10 @@ print(f"Number of weakly connected components: {weakly_connected_components}")
 strongly_connected_components = nx.number_strongly_connected_components(large_graph)
 print(f"Number of strongly connected components: {strongly_connected_components}")
 
-# Find the sizes of strongly connected components
+# sizes of strongly connected components
 strongly_connected_components_sizes = [len(component) for component in nx.strongly_connected_components(large_graph)]
 
-# Find the largest strongly connected component
+# largest strongly connected component
 largest_strongly_connected_component_size = max(strongly_connected_components_sizes)
 print(f"Size of the largest strongly connected component: {largest_strongly_connected_component_size}")
 
@@ -182,13 +182,13 @@ print("Top 20 Nodes by Degree Centrality:", top_degree_nodes)
 giant_component = max(nx.weakly_connected_components(medium_graph), key=len)
 giant_component_subgraph = medium_graph.subgraph(giant_component)
 
-# Convert the directed graph to an undirected one
+# Convert the directed graph into an undirected one
 giant_component_undirected = giant_component_subgraph.to_undirected()
 
 # Apply Louvain method for community detection
 partition = community.best_partition(giant_component_undirected)
 
-# Draw the graph with community colors
+# Draw the graph with multiple colors referring the community
 pos = nx.spring_layout(giant_component_undirected)
 colors = [partition[node] for node in giant_component_undirected.nodes()]
 
