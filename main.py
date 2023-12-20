@@ -129,48 +129,62 @@ print(f"Number of links in the largest strongly connected component: {num_links_
 # print(f"Average Clustering Coefficient for the large network: {large_average_clustering_coefficient}")
 
 # Question 3.6
-medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
-medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_weakly_connected_component)
+largest_weakly_connected = max(nx.weakly_connected_components(medium_graph), key=len)
 
-# Compute the shortest path lengths within the largest weakly connected component for the medium graph
-medium_all_distances = []
-for source in medium_largest_weakly_connected_subgraph.nodes():
-    shortest_paths = nx.single_target_shortest_path_length(
-        medium_largest_weakly_connected_subgraph.reverse(), source
-    )
-    medium_all_distances.extend(list(shortest_paths.items()))
+# Create a subgraph of the largest weakly connected component
+largest_weakly_connected_subgraph = medium_graph.subgraph(largest_weakly_connected)
 
-# Filter out the None values
-medium_all_distances = [dist for _, dist in medium_all_distances if dist is not None]
+# Calculate the distance distribution
+distances = nx.shortest_path_length(largest_weakly_connected_subgraph)
+# Plot the distribution
 
-# Plot the histogram of distances for the medium graph
-plt.hist(medium_all_distances, bins=range(int(max(medium_all_distances, default=0)) + 1), align='left', density=True)
+plt.hist(distances, bins=range(int(max(distances, default=0)) + 1), align='left', density=True)
 plt.xlabel('Distance')
 plt.ylabel('Frequency')
 plt.title('Distance Distribution of the Largest Weakly Connected Component for Medium Network')
 plt.show()
 
-# Repeat the process for the large graph
-large_largest_weakly_connected_component = max(nx.weakly_connected_components(large_graph), key=len)
-large_largest_weakly_connected_subgraph = large_graph.subgraph(large_largest_weakly_connected_component)
-
-large_all_distances = []
-for source in large_largest_weakly_connected_subgraph.nodes():
-    shortest_paths = nx.single_target_shortest_path_length(
-        large_largest_weakly_connected_subgraph.reverse(), source
-    )
-    large_all_distances.extend(list(shortest_paths.items()))
-
-# Filter out the None values
-large_all_distances = [dist for _, dist in large_all_distances if dist is not None]
-
-# Plot the histogram of distances for the large graph
-plt.hist(large_all_distances, bins=range(int(max(large_all_distances, default=0)) + 1), align='left', density=True)
-plt.xlabel('Distance')
-plt.ylabel('Frequency')
-plt.title('Distance Distribution of the Largest Weakly Connected Component for Large Network')
-plt.show()
-
+# medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
+# medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_weakly_connected_component)
+#
+# # Compute the shortest path lengths within the largest weakly connected component for the medium graph
+# medium_all_distances = []
+# for source in medium_largest_weakly_connected_subgraph.nodes():
+#     shortest_paths = nx.single_target_shortest_path_length(
+#         medium_largest_weakly_connected_subgraph.reverse(), source
+#     )
+#     medium_all_distances.extend(shortest_paths.items())
+#
+# # Filter out the None values
+# medium_all_distances = [dist for _, dist in medium_all_distances if dist is not None]
+#
+# # Plot the histogram of distances for the medium graph
+# plt.hist(medium_all_distances, bins=range(int(max(medium_all_distances, default=0)) + 1), align='left', density=True)
+# plt.xlabel('Distance')
+# plt.ylabel('Frequency')
+# plt.title('Distance Distribution of the Largest Weakly Connected Component for Medium Network')
+# plt.show()
+#
+# # Repeat the process for the large graph
+# large_largest_weakly_connected_component = max(nx.weakly_connected_components(large_graph), key=len)
+# large_largest_weakly_connected_subgraph = large_graph.subgraph(large_largest_weakly_connected_component)
+#
+# large_all_distances = []
+# for source in large_largest_weakly_connected_subgraph.nodes():
+#     shortest_paths = nx.single_target_shortest_path_length(
+#         large_largest_weakly_connected_subgraph.reverse(), source
+#     )
+#     large_all_distances.extend(shortest_paths.items())
+#
+# # Filter out the None values
+# large_all_distances = [dist for _, dist in large_all_distances if dist is not None]
+#
+# # Plot the histogram of distances for the large graph
+# plt.hist(large_all_distances, bins=range(int(max(large_all_distances, default=0)) + 1), align='left', density=True)
+# plt.xlabel('Distance')
+# plt.ylabel('Frequency')
+# plt.title('Distance Distribution of the Largest Weakly Connected Component for Large Network')
+# plt.show()
 
 # Question 3.7
 
