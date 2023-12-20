@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import community
 
 
 # Load the graph from a file
@@ -175,3 +176,21 @@ top_degree_nodes = sorted(degree_centrality, key=degree_centrality.get, reverse=
 print("Top 20 Nodes by Betweenness Centrality:", top_betweenness_nodes)
 print("Top 20 Nodes by Closeness Centrality:", top_closeness_nodes)
 print("Top 20 Nodes by Degree Centrality:", top_degree_nodes)
+
+# Question 3.8
+
+giant_component = max(nx.weakly_connected_components(medium_graph), key=len)
+giant_component_subgraph = medium_graph.subgraph(giant_component)
+
+# Apply Louvain method for community detection
+partition = community.best_partition(giant_component_subgraph)
+
+# Draw the graph with community colors
+pos = nx.spring_layout(giant_component_subgraph)
+colors = [partition[node] for node in giant_component_subgraph.nodes()]
+
+plt.figure(figsize=(10, 8))
+nx.draw(giant_component_subgraph, pos, node_color=colors, cmap=plt.cm.get_cmap("viridis"), with_labels=False,
+        node_size=300)
+plt.title('Community Detection using Louvain Method')
+plt.show()
