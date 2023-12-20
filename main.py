@@ -122,12 +122,12 @@ print(f"Number of nodes in the largest strongly connected component: {num_nodes_
 print(f"Number of links in the largest strongly connected component: {num_links_largest_scc}")
 
 # Question 3.5
-#
-# medium_average_clustering_coefficient = nx.average_clustering(medium_graph)
-# large_average_clustering_coefficient = nx.average_clustering(large_graph)
-#
-# print(f"Average Clustering Coefficient for the mdeium network: {medium_average_clustering_coefficient}")
-# print(f"Average Clustering Coefficient for the large network: {large_average_clustering_coefficient}")
+
+medium_average_clustering_coefficient = nx.average_clustering(medium_graph)
+large_average_clustering_coefficient = nx.average_clustering(large_graph)
+
+print(f"Average Clustering Coefficient for the mdeium network: {medium_average_clustering_coefficient}")
+print(f"Average Clustering Coefficient for the large network: {large_average_clustering_coefficient}")
 
 # Question 3.6
 largest_weakly_connected = max(nx.weakly_connected_components(medium_graph), key=len)
@@ -192,8 +192,8 @@ partition = community.best_partition(giant_component_undirected)
 pos = nx.spring_layout(giant_component_undirected)
 colors = [partition[node] for node in giant_component_undirected.nodes()]
 
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(25, 18))
 nx.draw(giant_component_undirected, pos, node_color=colors, cmap=plt.colormaps.get_cmap("viridis"),
-        with_labels=True, node_size=1000)
+        with_labels=True, node_size=1800)
 plt.title('Community Detection using Louvain Method')
 plt.show()
