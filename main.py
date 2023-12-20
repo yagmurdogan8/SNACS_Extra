@@ -50,8 +50,8 @@ out_degree_freq_large = degree_histogram_directed(large_graph, out_degree=True)
 
 # Plot degree distributions for medium graph
 plt.figure(figsize=(12, 8))
-plt.loglog(range(len(in_degree_freq_medium)), in_degree_freq_medium, 'go-', label='Medium In-degree')
-plt.loglog(range(len(out_degree_freq_medium)), out_degree_freq_medium, 'bo-', label='Medium Out-degree')
+plt.loglog(range(len(in_degree_freq_medium)), in_degree_freq_medium, 'go-', label='Medium In-degree', alpha=0.3)
+plt.loglog(range(len(out_degree_freq_medium)), out_degree_freq_medium, 'bo-', label='Medium Out-degree', alpha=0.3)
 plt.xlabel('Degree')
 plt.ylabel('Frequency')
 plt.legend()
@@ -60,8 +60,8 @@ plt.show()
 
 # Plot degree distributions for large graph
 plt.figure(figsize=(12, 8))
-plt.loglog(range(len(in_degree_freq_large)), in_degree_freq_large, 'go-', label='Large In-degree')
-plt.loglog(range(len(out_degree_freq_large)), out_degree_freq_large, 'bo-', label='Large Out-degree')
+plt.loglog(range(len(in_degree_freq_large)), in_degree_freq_large, 'go-', label='Large In-degree', alpha=0.3)
+plt.loglog(range(len(out_degree_freq_large)), out_degree_freq_large, 'bo-', label='Large Out-degree', alpha=0.3)
 plt.xlabel('Degree')
 plt.ylabel('Frequency')
 plt.legend()
@@ -139,53 +139,17 @@ distances = nx.shortest_path_length(largest_weakly_connected_subgraph)
 # Plot the distribution
 pos = nx.spring_layout(largest_weakly_connected_subgraph)
 
+# Set the figure size
+plt.figure(figsize=(14, 10))
+
 # Draw the nodes and edges
-nx.draw(largest_weakly_connected_subgraph, pos, with_labels=True, node_color='lightblue', node_size=300, edge_color='grey')
+nx.draw(largest_weakly_connected_subgraph, pos, with_labels=False, node_color='lightblue', node_size=300, edge_color='grey')
+
+# Draw the labels away from the nodes with a smaller font size
+nx.draw_networkx_labels(largest_weakly_connected_subgraph, pos, font_size=8, font_color='black', font_family='sans-serif', alpha=0.7)
 
 # Show the plot
 plt.show()
-
-# medium_largest_weakly_connected_component = max(nx.weakly_connected_components(medium_graph), key=len)
-# medium_largest_weakly_connected_subgraph = medium_graph.subgraph(medium_largest_weakly_connected_component)
-#
-# # Compute the shortest path lengths within the largest weakly connected component for the medium graph
-# medium_all_distances = []
-# for source in medium_largest_weakly_connected_subgraph.nodes():
-#     shortest_paths = nx.single_target_shortest_path_length(
-#         medium_largest_weakly_connected_subgraph.reverse(), source
-#     )
-#     medium_all_distances.extend(shortest_paths.items())
-#
-# # Filter out the None values
-# medium_all_distances = [dist for _, dist in medium_all_distances if dist is not None]
-#
-# # Plot the histogram of distances for the medium graph
-# plt.hist(medium_all_distances, bins=range(int(max(medium_all_distances, default=0)) + 1), align='left', density=True)
-# plt.xlabel('Distance')
-# plt.ylabel('Frequency')
-# plt.title('Distance Distribution of the Largest Weakly Connected Component for Medium Network')
-# plt.show()
-#
-# # Repeat the process for the large graph
-# large_largest_weakly_connected_component = max(nx.weakly_connected_components(large_graph), key=len)
-# large_largest_weakly_connected_subgraph = large_graph.subgraph(large_largest_weakly_connected_component)
-#
-# large_all_distances = []
-# for source in large_largest_weakly_connected_subgraph.nodes():
-#     shortest_paths = nx.single_target_shortest_path_length(
-#         large_largest_weakly_connected_subgraph.reverse(), source
-#     )
-#     large_all_distances.extend(shortest_paths.items())
-#
-# # Filter out the None values
-# large_all_distances = [dist for _, dist in large_all_distances if dist is not None]
-#
-# # Plot the histogram of distances for the large graph
-# plt.hist(large_all_distances, bins=range(int(max(large_all_distances, default=0)) + 1), align='left', density=True)
-# plt.xlabel('Distance')
-# plt.ylabel('Frequency')
-# plt.title('Distance Distribution of the Largest Weakly Connected Component for Large Network')
-# plt.show()
 
 # Question 3.7
 
