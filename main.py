@@ -139,21 +139,17 @@ distances = nx.shortest_path_length(largest_weakly_connected_subgraph)
 # Plot the distribution
 pos = nx.spring_layout(largest_weakly_connected_subgraph)
 
-# Define the region to display (adjust these coordinates as needed)
-xmin, xmax = -1, 1
-ymin, ymax = -1, 1
+# Set the figure size
+plt.figure(figsize=(14, 10))
 
-plt.figure(figsize=(8, 6))  # Adjust the figure size as needed
-
-# Draw the nodes and edges for the specified region
-nx.draw(largest_weakly_connected_subgraph, pos, with_labels=False, node_color='lightblue', node_size=300, edge_color='grey',
-        xlim=(xmin, xmax), ylim=(ymin, ymax))
+# Draw the nodes and edges
+nx.draw(largest_weakly_connected_subgraph, pos, with_labels=False, node_color='lightblue', node_size=800, edge_color='grey')
 
 # Draw the labels away from the nodes with a smaller font size
 nx.draw_networkx_labels(largest_weakly_connected_subgraph, pos, font_size=8, font_color='black', font_family='sans-serif', alpha=0.7)
 
 # Show the plot
-plt.title('Distance Distribution for the large network')
+plt.title("Distance Distribution for the medium network")
 plt.show()
 
 largest_weakly_connected = max(nx.weakly_connected_components(large_graph), key=len)
@@ -170,13 +166,13 @@ pos = nx.spring_layout(largest_weakly_connected_subgraph)
 plt.figure(figsize=(14, 10))
 
 # Draw the nodes and edges
-nx.draw(largest_weakly_connected_subgraph, pos, with_labels=False, node_color='lightblue', node_size=300, edge_color='grey')
+nx.draw(largest_weakly_connected_subgraph, pos, with_labels=False, node_color='lightblue', node_size=800, edge_color='grey')
 
 # Draw the labels away from the nodes with a smaller font size
 nx.draw_networkx_labels(largest_weakly_connected_subgraph, pos, font_size=8, font_color='black', font_family='sans-serif', alpha=0.7)
 
 # Show the plot
-plt.title('Distance Distribution for the large network')
+plt.title("Distance Distribution for the large network")
 plt.show()
 
 
