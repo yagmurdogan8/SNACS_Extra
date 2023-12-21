@@ -46,6 +46,7 @@ for i, graph in enumerate(densest_subgraphs):
     plt.show()
 
 
+
 # Print the nodes and edges of the densest subgraph
 print("Nodes in the Densest Subgraph:", densest_subgraphs[-1].nodes())
 print("Edges in the Densest Subgraph:", densest_subgraphs[-1].edges())
