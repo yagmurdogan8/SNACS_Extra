@@ -17,6 +17,7 @@ plt.title('Undirected graph for greedy')
 plt.show()
 
 
+
 def greedy_densest_subgraph(graph):
     densest_subgraphs = [graph.copy()]  # store graphs after each iteration
     current_density = nx.density(graph)
